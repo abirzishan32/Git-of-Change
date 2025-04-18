@@ -2,9 +2,15 @@ import React from 'react';
 
 const AuthLayout = ({ children }) => {
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
-            <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-md">
+        <div className="flex">
+            <div className="w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12">
+                <h2 className="text-lg font-medium text-black"> Gift of Change </h2>
                 {children}
+            </div>
+
+
+            <div className="hidden md:flex w-[40vw] h-screen items-center justify-center bg-blue-50 bg-[url('/public/login-page.jpg')] bg-cover bg-no-repeat bg-center overflow-hidden p-8">
+                <img src="/images/login-page.jpg" className="w-64 lg:w-[90%]" />
             </div>
         </div>
     )
