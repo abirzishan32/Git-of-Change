@@ -1,7 +1,101 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import AuthLayout from '../../components/layouts/AuthLayout';
+import Input from '../../components/inputs/Input';
+import { validateEmail } from '../../utils/helper';
 
 const Signup = () => {
-  return <div>Signup</div>;
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [adminInviteToken, setAdminInviteToken] = useState('');
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    if(!name) {
+      setError('Name is required');
+      return;
+    }
+
+
+    if(!validateEmail(email)) {
+      setError('Invalid email address');
+      return;
+    }
+
+
+    if(!password) {
+      setError('Password is required');
+      return;
+    }
+
+
+    setError("");
+ 
+  }
+  return (
+    <AuthLayout>
+      <div className="lg:w-[100%] h-full flex flex-col justify-center">
+        <h3 className="text-2xl font-bold text-white mb-2">
+          Create an account
+        </h3>
+        <p className="text-gray-400 mb-8">
+          Join us today and be part of the change
+        </p>
+
+        <form onSubmit={handleSignup} className="w-full max-w-md flex flex-col gap-2">
+          <Input 
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            label="Name"
+            placeholder="John Doe"
+            type="text"
+            required
+          />
+          
+          <Input 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="Email"
+            placeholder="johndoe@gmail.com"
+            type="email"
+            required
+          />
+          
+          <Input 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            label="Password"
+            placeholder="Create a strong password"
+            type="password"
+            required
+          />
+          
+          <Input 
+            value={adminInviteToken}
+            onChange={(e) => setAdminInviteToken(e.target.value)}
+            label="Admin Invite Token"
+            placeholder="Optional - for admin registration"
+            type="password"
+          />
+
+          {error && <p className="text-red-500 text-sm mt-2 mb-2">{error}</p>}
+          
+          <button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-md font-medium mt-6 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg">Sign Up</button>
+          
+          <p className="text-sm text-gray-400 mt-6 text-center">
+            Already have an account? <Link to="/login" className="text-purple-500 font-medium hover:text-purple-400 transition-all duration-300">Login</Link>
+          </p>
+        </form>
+      </div>
+    </AuthLayout>
+  )
 };
 
 export default Signup;
