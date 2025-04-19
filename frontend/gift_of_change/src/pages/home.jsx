@@ -7,33 +7,34 @@ const Home = () => {
       id: 1,
       title: "Education",
       description: "Scholarships, schools, books, resources for underprivileged children",
-      image: "/public/education.webp",
+      image: "/education.webp",
     },
     {
       id: 2,
       title: "Health & Medicine",
       description: "Cancer research, mental health, medical aid, hospitals, vaccinations",
-      image: "/public/health.webp",
+      image: "/health.webp",
     },
     {
       id: 3,
       title: "Poverty & Hunger",
       description: "Food banks, shelter, basic income initiatives, clean water",
-      image: "/public/poverty.webp",
+      image: "/poverty.webp",
     },
     
     {
       id: 4,
       title: "Disaster Relief",
       description: "Earthquakes, floods, war zones, emergency aid",
-      image: "/public/disaster.jpg",
+      image: "/disaster.jpg",
     },
     {
       id: 5,
       title: "Animal Welfare",
-      description: "Rescue shelters, wildlife protection, anti-poaching",
-      image: "/public/animal.jpg",
+      description: "Help animals in need, rescue shelters, wildlife protection, anti-poaching",
+      image: "/animal.jpg",
     }
+    
   ];
 
   return (
@@ -43,7 +44,7 @@ const Home = () => {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-90 z-10"></div>
           <img 
-            src="/public/hero-background.jpg" 
+            src="/hero-background.jpg" 
             alt="Giving back" 
             className="w-full h-full object-cover object-center"
             style={{ filter: 'brightness(0.4) contrast(1.2)' }}
