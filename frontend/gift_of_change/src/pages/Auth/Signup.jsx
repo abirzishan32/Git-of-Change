@@ -3,6 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import AuthLayout from '../../components/layouts/AuthLayout';
 import Input from '../../components/inputs/Input';
 import { validateEmail } from '../../utils/helper';
+import axiosInstance from '../../utils/axiosInstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import { UserContext } from '../../context/userContext';
+import { useContext } from 'react';
 
 const Signup = () => {
 
@@ -11,6 +15,10 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [adminInviteToken, setAdminInviteToken] = useState('');
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+
+  const { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -37,6 +45,44 @@ const Signup = () => {
 
 
     setError("");
+    setLoading(true);
+
+    try{
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+        name,
+        email,
+        password,
+        ...(adminInviteToken ? { adminInviteToken } : {})
+      });
+
+      const {token, role} = response.data;
+
+      if(token){
+        localStorage.setItem("token", token);
+        updateUser(response.data);
+
+        if(role === "admin"){
+          navigate("/admin/dashboard");
+        }
+        else{
+          navigate("/home");
+        }
+      }
+        
+
+    }
+    catch(error){
+      console.error("Registration error:", error);
+      if(error.response && error.response.data && error.response.data.message){
+        setError(error.response.data.message);
+      }
+      else{
+        setError("An unexpected error occurred. Please check your connection and try again.");
+      }
+    }
+    finally {
+      setLoading(false);
+    }
  
   }
   return (
@@ -87,7 +133,13 @@ const Signup = () => {
 
           {error && <p className="text-red-500 text-sm mt-2 mb-2">{error}</p>}
           
-          <button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-md font-medium mt-6 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg">Sign Up</button>
+          <button 
+            type="submit" 
+            disabled={loading}
+            className={`w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-md font-medium mt-6 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+          >
+            {loading ? 'Signing Up...' : 'Sign Up'}
+          </button>
           
           <p className="text-sm text-gray-400 mt-6 text-center">
             Already have an account? <Link to="/login" className="text-purple-500 font-medium hover:text-purple-400 transition-all duration-300">Login</Link>

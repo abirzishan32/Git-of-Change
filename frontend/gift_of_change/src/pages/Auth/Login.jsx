@@ -2,17 +2,21 @@ import React from 'react';
 import AuthLayout from '../../components/layouts/AuthLayout';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../components/inputs/Input';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { validateEmail, validatePassword } from '../../utils/helper';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
+import { UserContext } from '../../context/userContext';
 
 const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -33,6 +37,7 @@ const Login = () => {
 
 
     setError("");
+    setLoading(true);
 
     try{
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
@@ -44,23 +49,28 @@ const Login = () => {
 
       if(token){
         localStorage.setItem("token", token);
+        updateUser(response.data);
 
         if(role === "admin"){
           navigate("/admin/dashboard");
         }
         else{
-          navigate("/user/dashboard");
+          navigate("/home");
         }
       }
 
     }
     catch(error){
+      console.error("Login error:", error);
       if(error.response && error.response.data && error.response.data.message){
         setError(error.response.data.message);
       }
       else{
-        setError("An unexpected error occurred");
+        setError("An unexpected error occurred. Please check your connection and try again.");
       }
+    }
+    finally {
+      setLoading(false);
     }
  
   }
@@ -93,8 +103,12 @@ const Login = () => {
 
           {error && <p className="text-red-500 text-sm mt-2 mb-4">{error}</p>}
 
-          <button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-md font-medium mt-6 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg"> 
-            Login 
+          <button 
+            type="submit" 
+            disabled={loading}
+            className={`w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-md font-medium mt-6 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+          > 
+            {loading ? 'Logging in...' : 'Login'}
           </button>
 
           <p className="text-sm text-gray-400 mt-6 text-center">

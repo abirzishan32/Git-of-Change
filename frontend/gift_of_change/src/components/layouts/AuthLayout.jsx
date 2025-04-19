@@ -2,7 +2,7 @@ import React from 'react';
 
 const AuthLayout = ({ children }) => {
     return (
-        <div className="flex h-screen w-screen bg-gray-900">
+        <div className="flex h-screen w-screen">
             <div className="w-screen h-screen md:w-[60vw] px-8 md:px-12 pt-8 pb-12 bg-black bg-opacity-90 text-white">
                 <h2 className="text-xl font-semibold text-white tracking-wide"> 
                     <span className="text-purple-500">Gift</span> of <span className="text-purple-500">Change</span> 

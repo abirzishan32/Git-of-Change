@@ -4,29 +4,29 @@ import { API_PATHS } from '../utils/apiPaths';
 
 export const UserContext = createContext();
 
-const UserProvider = ({children}) => {
+export const UserProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if(user) return;
+        if (user) return;
 
         const accessToken = localStorage.getItem("token");
-        if(!accessToken) {
+        if (!accessToken) {
             setLoading(false);
             return;
         }
 
         const fetchUser = async () => {
-            try{
+            try {
                 const response = await axiosInstance.get(API_PATHS.AUTH.GET_PROFILE);
                 setUser(response.data);
             }
-            catch(error){
+            catch (error) {
                 console.error("Error fetching user profile:", error);
             }
-            finally{
+            finally {
                 setLoading(false);
             }
         };
@@ -45,10 +45,11 @@ const UserProvider = ({children}) => {
     };
 
     return (
-        <UserContext.Provider value={{user, loading, updateUser, clearUser}}>
+        <UserContext.Provider value={{ user, loading, updateUser, clearUser }}>
             {children}
         </UserContext.Provider>
     )
-        
+
 }
+
 export default UserProvider;
