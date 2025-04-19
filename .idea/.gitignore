@@ -7,3 +7,4 @@
 /dataSources/
 /gitignore
 /dataSources.local.xml
+/.env

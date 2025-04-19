@@ -7,9 +7,11 @@ import Dashboard from './pages/Admin/Dashboard';
 import UserDashboard from './pages/User/UserDashboard';
 import MyDonations from './pages/User/MyDonations';
 import Home from './pages/home';
+import DonateForm from './pages/DonateForm';
 import { UserContext, UserProvider } from './context/userContext';
 import { Outlet } from 'react-router-dom';
 import { useContext } from 'react';
+
 
 const Root = () => {
   const { user, loading } = useContext(UserContext);
@@ -34,6 +36,10 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
             <Route path="/home" element={<Home />} />
+            
+            {/* Donation Routes */}
+            <Route path="/donate/:domainId" element={<DonateForm />} />
+            <Route path="/donate" element={<DonateForm />} />
 
             {/* ADMIN ROUTES */}
             <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
