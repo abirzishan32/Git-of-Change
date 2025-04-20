@@ -57,12 +57,7 @@ const Home = () => {
             <p className="text-lg md:text-xl text-gray-700 mb-8">
               Your generosity can transform lives. Choose a cause you care about and create lasting change today.
             </p>
-            <Link 
-              to="/donate" 
-              className="px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-md font-medium transition-all duration-300 transform hover:translate-y-[-4px] hover:shadow-lg inline-block"
-            >
-              Donate Now
-            </Link>
+            
           </div>
         </div>
       </section>

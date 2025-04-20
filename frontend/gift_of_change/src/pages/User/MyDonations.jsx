@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
+import { UserContext } from '../../context/userContext';
 
 const MyDonations = () => {
   const [donations, setDonations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const fetchDonations = async () => {
@@ -31,7 +33,11 @@ const MyDonations = () => {
     <div className="min-h-screen bg-gray-50 text-gray-800 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
-          <h1 className="charity-header mb-6">My Donations</h1>
+          <h1 className="charity-header mb-2">My Donations</h1>
+          
+          <div className="text-xl text-green-700 font-medium mb-6">
+            Thank you for being a part of making a difference, {user?.name || 'generous donor'}!
+          </div>
           
           <div className="bg-white rounded-xl p-6 mb-8 shadow-md">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -55,7 +61,7 @@ const MyDonations = () => {
           <div className="flex justify-between items-center mb-6">
             <h2 className="charity-subheader">Donation History</h2>
             <Link 
-              to="/donate" 
+              to="/home" 
               className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition-all"
             >
               Make a New Donation

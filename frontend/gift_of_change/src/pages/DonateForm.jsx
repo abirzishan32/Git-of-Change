@@ -11,6 +11,7 @@ const stripePromise = loadStripe('pk_test_51RFgjIGgd6saM2FuNpp5dEKOA2GmwxLSkxQ4T
 
 const DonateForm = () => {
   const { domainId } = useParams();
+  const navigate = useNavigate();
   const [domain, setDomain] = useState(null);
   
   // Define the donation domains
@@ -50,13 +51,15 @@ const DonateForm = () => {
   useEffect(() => {
     // Find the donation domain based on the ID
     const domainData = donationDomains.find(d => d.id === parseInt(domainId));
-    setDomain(domainData || { 
-      id: 0, 
-      title: "General Donation", 
-      description: "Support our organization's mission across all areas of need.",
-      image: "/hero-background.jpg" 
-    });
-  }, [domainId]);
+    
+    if (!domainData) {
+      // Redirect to donation page if no valid domain is found
+      navigate('/donate');
+      return;
+    }
+    
+    setDomain(domainData);
+  }, [domainId, navigate]);
   
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 py-12">

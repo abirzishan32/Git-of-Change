@@ -13,6 +13,11 @@ const createPaymentIntent = asyncHandler(async (req, res) => {
     throw new Error('Please provide a valid donation amount (minimum $1)');
   }
 
+  if (!donationCategory) {
+    res.status(400);
+    throw new Error('Please select a donation category');
+  }
+
   try {
     // Create a payment intent
     const paymentIntent = await stripe.paymentIntents.create({
@@ -20,7 +25,7 @@ const createPaymentIntent = asyncHandler(async (req, res) => {
       currency: 'usd',
       metadata: {
         userId: req.user._id.toString(),
-        donationCategory: donationCategory || 'General',
+        donationCategory: donationCategory,
       },
     });
 
@@ -41,7 +46,7 @@ const createPaymentIntent = asyncHandler(async (req, res) => {
 const recordDonation = asyncHandler(async (req, res) => {
   const { amount, paymentIntentId, donationCategory } = req.body;
   
-  if (!amount || !paymentIntentId) {
+  if (!amount || !paymentIntentId || !donationCategory) {
     res.status(400);
     throw new Error('Missing required donation information');
   }
@@ -52,7 +57,7 @@ const recordDonation = asyncHandler(async (req, res) => {
       user: req.user._id,
       amount: amount / 100, // Convert from cents to dollars for storage
       paymentIntentId,
-      donationCategory: donationCategory || 'General',
+      donationCategory: donationCategory,
       status: 'completed',
     });
     
