@@ -2,9 +2,10 @@ const express = require('express');
 const { 
   createPaymentIntent, 
   recordDonation, 
-  getDonationHistory 
+  getDonationHistory,
+  getAllDonations
 } = require('../controllers/paymentController');
-const { protect } = require('../middlewares/authMiddleware');
+const { protect, adminOnly } = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
@@ -12,5 +13,6 @@ const router = express.Router();
 router.post('/create-payment-intent', protect, createPaymentIntent);
 router.post('/record-donation', protect, recordDonation);
 router.get('/donation-history', protect, getDonationHistory);
+router.get('/all-donations', protect, adminOnly, getAllDonations);
 
 module.exports = router; 

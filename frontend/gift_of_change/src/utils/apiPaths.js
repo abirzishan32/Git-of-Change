@@ -18,6 +18,7 @@ export const API_PATHS = {
     DONATIONS: {
         CREATE_PAYMENT_INTENT: "/api/payments/create-payment-intent",
         RECORD_DONATION: "/api/payments/record-donation",
-        GET_DONATION_HISTORY: "/api/payments/donation-history"
+        GET_DONATION_HISTORY: "/api/payments/donation-history",
+        GET_ALL_DONATIONS: "/api/payments/all-donations"
     }
 }

@@ -33,7 +33,18 @@ const MyDonations = () => {
     <div className="min-h-screen bg-gray-50 text-gray-800 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
-          <h1 className="charity-header mb-2">My Donations</h1>
+          <div className="flex justify-between items-center mb-2">
+            <h1 className="charity-header">My Donations</h1>
+            <Link 
+              to="/home" 
+              className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-md font-medium transition-all duration-300 inline-flex items-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+              </svg>
+              Return to Home
+            </Link>
+          </div>
           
           <div className="text-xl text-green-700 font-medium mb-6">
             Thank you for being a part of making a difference, {user?.name || 'generous donor'}!
@@ -60,12 +71,7 @@ const MyDonations = () => {
           
           <div className="flex justify-between items-center mb-6">
             <h2 className="charity-subheader">Donation History</h2>
-            <Link 
-              to="/home" 
-              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition-all"
-            >
-              Make a New Donation
-            </Link>
+            
           </div>
           
           {loading ? (

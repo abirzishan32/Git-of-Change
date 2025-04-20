@@ -85,8 +85,26 @@ const getDonationHistory = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get all donations (Admin only)
+// @route   GET /api/payments/all-donations
+// @access  Private/Admin
+const getAllDonations = asyncHandler(async (req, res) => {
+  try {
+    const donations = await Donation.find({})
+      .populate('user', 'name email')  // Populate user details
+      .sort({ createdAt: -1 });
+    
+    res.json(donations);
+  } catch (error) {
+    console.error('Get all donations error:', error);
+    res.status(500);
+    throw new Error('Error fetching all donations');
+  }
+});
+
 module.exports = {
   createPaymentIntent,
   recordDonation,
-  getDonationHistory
+  getDonationHistory,
+  getAllDonations
 }; 
