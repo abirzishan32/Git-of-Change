@@ -5,8 +5,8 @@
   margin: 0;
   padding: 0;
   text-align: left;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #f9fafb;
+  color: #374151;
 }
 
 /* Fix scrollbars */
@@ -45,7 +45,7 @@ html {
 
 .card-hover:hover {
   transform: translateY(-8px);
-  box-shadow: 0 10px 25px -5px rgba(138, 75, 255, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(79, 121, 66, 0.2);
 }
 
 /* Custom scrollbar */
@@ -54,22 +54,62 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #ccc;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #aaa;
 }
 
 /* Custom focus states */
 *:focus {
-  outline: 2px solid #8a4bff;
+  outline: 2px solid #4f7942;
   outline-offset: 2px;
+}
+
+/* Charity specific styles */
+.giving-hand {
+  position: relative;
+}
+
+.giving-hand::after {
+  content: "";
+  background-image: url('/hand-heart.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  opacity: 0.1;
+  width: 300px;
+  height: 300px;
+  right: -100px;
+  bottom: -100px;
+  z-index: -1;
+  transform: rotate(10deg);
+}
+
+.donation-pulse {
+  position: relative;
+}
+
+.donation-pulse::before {
+  content: "";
+  position: absolute;
+  border: 4px solid rgba(79, 121, 66, 0.4);
+  border-radius: 50%;
+  animation: pulsing 2s ease-out infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes pulsing {
+  0% { width: 0%; height: 0%; opacity: 1; }
+  100% { width: 120%; height: 120%; opacity: 0; }
 }
 
 .logo {

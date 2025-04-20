@@ -79,8 +79,8 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className="lg:w-[70%] h-full flex flex-col justify-center">
-        <h3 className="text-2xl font-bold text-white mb-2">Welcome Back</h3>
-        <p className="text-gray-400 mb-8">Sign in to continue your journey</p>
+        <h3 className="charity-header">Welcome Back</h3>
+        <p className="text-gray-600 mb-8">Sign in to continue your giving journey</p>
 
         <form onSubmit={handleLogin} className="w-full max-w-md">
           <Input
@@ -101,20 +101,19 @@ const Login = () => {
             required
           />
 
-          {error && <p className="text-red-500 text-sm mt-2 mb-4">{error}</p>}
+          {error && <p className="text-red-600 text-sm mt-2 mb-4">{error}</p>}
 
           <button 
             type="submit" 
             disabled={loading}
-            className={`w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-md font-medium mt-6 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+            className={`w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-md font-medium mt-6 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
           > 
             {loading ? 'Logging in...' : 'Login'}
           </button>
 
-          <p className="text-sm text-gray-400 mt-6 text-center">
-            New to Gift of Change? <Link to="/register" className="text-purple-500 font-medium hover:text-purple-400 transition-all duration-300">Sign up</Link>
+          <p className="text-sm text-gray-600 mt-6 text-center">
+            New to Gift of Change? <Link to="/register" className="text-green-600 font-medium hover:text-green-800 transition-all duration-300">Sign up</Link>
           </p>
-
         </form>
       </div>
     </AuthLayout>

@@ -12,7 +12,7 @@ const Input = ({ value, onChange, label, placeholder, type, required }) => {
 
     return (
         <div className="mb-4">
-            <label className="text-[13px] text-gray-300 font-medium tracking-wide mb-1 block"> {label} </label>
+            <label className="text-[13px] text-gray-800 font-medium tracking-wide mb-1 block"> {label} </label>
 
             <div className="relative border-b border-gray-700 focus-within:border-purple-500 transition-all duration-300 py-2 group">
                 <input
@@ -20,7 +20,7 @@ const Input = ({ value, onChange, label, placeholder, type, required }) => {
                         type == "password" ? (showPassword ? "text" : "password") : type
                     }
                     placeholder={placeholder}
-                    className="w-full bg-transparent outline-none text-white placeholder-gray-500 pr-8"
+                    className="w-full bg-transparent outline-none text-black placeholder-gray-500 pr-8"
                     value={value}
                     onChange={(e) => onChange(e)}
                     required={required}

@@ -6,7 +6,7 @@
 @theme {
   --font-display: 'Poppins', sans-serif;
   --breakpoint-3xl: 1920px;
-  --color-primary: #000000;
+  --color-primary: #4f7942;
 }
 
 @layer base {
@@ -15,7 +15,7 @@
   }
 
   body{
-    @apply  text-white;
+    @apply bg-gray-50 text-gray-800;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
@@ -29,10 +29,35 @@
 
 @layer components {
   .input-box{
-    @apply w-full flex justify-between gap-3 text-sm text-white bg-transparent rounded px-4 py-3 mb-4 border-b border-gray-700 focus-within:border-purple-500 transition-all duration-300;
+    @apply w-full flex justify-between gap-3 text-sm text-gray-700 bg-white rounded-lg px-4 py-3 mb-4 border border-gray-200 focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-100 transition-all duration-300;
   }
 
   .btn-primary{
-    @apply w-full text-sm font-medium text-white bg-purple-600 shadow-lg p-3 rounded-md my-2 hover:bg-purple-700 transition-all duration-300 transform hover:translate-y-[-2px];
+    @apply w-full text-sm font-medium text-white bg-green-600 shadow-md p-3 rounded-md my-2 hover:bg-green-700 transition-all duration-300 transform hover:translate-y-[-2px];
+  }
+
+  /* Charity-specific components */
+  .charity-card {
+    @apply bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300;
+  }
+  
+  .charity-header {
+    @apply text-3xl font-bold text-green-800 mb-2;
+  }
+  
+  .charity-subheader {
+    @apply text-xl font-semibold text-green-700;
+  }
+  
+  .charity-text {
+    @apply text-gray-700;
+  }
+  
+  .charity-highlight {
+    @apply text-green-600 font-medium;
+  }
+  
+  .charity-section {
+    @apply py-12 bg-gradient-to-b from-white to-green-50;
   }
 }

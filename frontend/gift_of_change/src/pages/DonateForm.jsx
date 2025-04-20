@@ -59,29 +59,29 @@ const DonateForm = () => {
   }, [domainId]);
   
   return (
-    <div className="min-h-screen bg-black text-white py-12">
+    <div className="min-h-screen bg-gray-50 text-gray-800 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {domain && (
           <>
             <div className="text-center mb-12">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                Donate to <span className="text-purple-500">{domain.title}</span>
+              <h1 className="charity-header">
+                Donate to <span className="text-green-600">{domain.title}</span>
               </h1>
-              <p className="text-gray-400 max-w-3xl mx-auto">
+              <p className="text-gray-600 max-w-3xl mx-auto">
                 {domain.description}
               </p>
             </div>
             
-            <div className="bg-gray-900 rounded-xl overflow-hidden shadow-2xl">
+            <div className="bg-white rounded-xl overflow-hidden shadow-md">
               <div className="h-48 relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900 to-black opacity-70 z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-green-700 opacity-70 z-10"></div>
                 <img 
                   src={domain.image} 
                   alt={domain.title} 
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = "https://via.placeholder.com/800x400/111827/f3f4f6?text=Image+Not+Found";
+                    e.target.src = "https://via.placeholder.com/800x400/f9fafb/4f7942?text="+domain.title;
                   }}
                 />
               </div>
@@ -176,14 +176,18 @@ const CheckoutForm = ({ donationCategory }) => {
     <form onSubmit={handleSubmit} className="space-y-6">
       {succeeded ? (
         <div className="text-center py-8">
-          <div className="text-green-500 text-5xl mb-4">✓</div>
-          <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
-          <p className="text-gray-400">Your donation was successful. You're making a difference!</p>
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-bold text-green-800 mb-2">Thank You!</h3>
+          <p className="text-gray-600">Your donation was successful. You're making a difference!</p>
         </div>
       ) : (
         <>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Donation Amount
             </label>
             
@@ -194,8 +198,8 @@ const CheckoutForm = ({ donationCategory }) => {
                   type="button"
                   className={`py-3 px-4 rounded-md transition-all ${
                     amount === presetAmount 
-                      ? 'bg-purple-600 text-white' 
-                      : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                      ? 'bg-green-600 text-white shadow-md' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                   onClick={() => setAmount(presetAmount)}
                 >
@@ -205,18 +209,18 @@ const CheckoutForm = ({ donationCategory }) => {
             </div>
             
             <div className="mt-4">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Custom Amount
               </label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
                   $
                 </span>
                 <input
                   type="number"
                   value={amount / 100}
                   onChange={(e) => setAmount(Math.max(100, Math.round(parseFloat(e.target.value) * 100)))}
-                  className="w-full py-3 pl-8 pr-4 bg-gray-800 border border-gray-700 rounded-md focus:ring-purple-500 focus:border-purple-500 text-white"
+                  className="w-full py-3 pl-8 pr-4 bg-white border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500 text-gray-700"
                   placeholder="Enter amount"
                   min="1"
                   step="0.01"
@@ -226,23 +230,23 @@ const CheckoutForm = ({ donationCategory }) => {
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Card Details
             </label>
-            <div className="p-4 bg-gray-800 border border-gray-700 rounded-md">
+            <div className="p-4 bg-white border border-gray-300 rounded-md">
               <CardElement
                 options={{
                   style: {
                     base: {
                       fontSize: '16px',
-                      color: '#ffffff',
+                      color: '#4b5563',
                       '::placeholder': {
-                        color: '#aab7c4',
+                        color: '#9ca3af',
                       },
                     },
                     invalid: {
-                      color: '#fa755a',
-                      iconColor: '#fa755a',
+                      color: '#ef4444',
+                      iconColor: '#ef4444',
                     },
                   },
                 }}
@@ -251,7 +255,7 @@ const CheckoutForm = ({ donationCategory }) => {
           </div>
           
           {error && (
-            <div className="text-red-500 text-sm p-2 bg-red-900 bg-opacity-30 rounded">
+            <div className="text-red-600 text-sm p-3 bg-red-50 border border-red-200 rounded">
               {error}
             </div>
           )}
@@ -259,7 +263,7 @@ const CheckoutForm = ({ donationCategory }) => {
           <button
             type="submit"
             disabled={!stripe || loading}
-            className={`w-full py-4 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-md transition-all ${
+            className={`w-full py-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-md transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg ${
               loading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
