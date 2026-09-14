@@ -1,1 +1,24 @@
-/.DS_Store
+# Dependencies
+node_modules/
+
+# Environment variables (only the examples are committed)
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+coverage/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
