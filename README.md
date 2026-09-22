@@ -80,7 +80,7 @@ A few details worth pointing out:
 | Backend  | Node.js, Express 5, MongoDB with Mongoose 9, Zod, JSON Web Tokens, bcrypt       |
 | Security | Helmet, CORS allow-list, rate limiting on login and payment endpoints           |
 | Testing  | Vitest, Supertest, mongodb-memory-server, React Testing Library                 |
-| Tooling  | npm workspaces, ESLint, Prettier, GitHub Actions                                |
+| Tooling  | npm workspaces, ESLint, Prettier, Docker, Docker Compose, GitHub Actions, Trivy |
 
 ## Project structure
 
@@ -200,6 +200,29 @@ npm run create-admin -- --email jane@example.com --name "Jane Doe" --password "a
 ```
 
 If the email already belongs to an account, that account is promoted to admin.
+
+## Running with Docker
+
+The API, the client behind nginx and MongoDB all start from one command. Needs Docker Compose v2.24 or newer.
+
+```bash
+JWT_SECRET=$(openssl rand -hex 32) docker compose up --build
+```
+
+The client is served on http://localhost:8080 and proxies `/api` to the API container, which also stays reachable on port 5000. Stripe keys are read from `server/.env` when that file exists. To enable checkout in the built client, pass its publishable key at build time:
+
+```bash
+VITE_STRIPE_PUBLISHABLE_KEY=pk_test_... docker compose up --build
+```
+
+Both images are built, scanned with Trivy and pushed to GitHub Container Registry on every push to `main`:
+
+```
+ghcr.io/abirzishan32/donation-website/server:latest
+ghcr.io/abirzishan32/donation-website/client:latest
+```
+
+The build fails when Trivy finds a critical vulnerability that has a fix available.
 
 ## Scripts
 
