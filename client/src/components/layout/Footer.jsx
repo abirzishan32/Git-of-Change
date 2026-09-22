@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import { Logo } from '../Logo';
 
-const REPOSITORY_URL = 'https://github.com/abirzishan32/donation-website';
+const REPOSITORY_URL = 'https://github.com/abirzishan32/Git-of-Change';
 
 export function Footer() {
   return (

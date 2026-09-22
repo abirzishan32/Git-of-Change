@@ -1,6 +1,6 @@
 # Gift of Change
 
-[![CI](https://github.com/abirzishan32/donation-website/actions/workflows/ci.yml/badge.svg)](https://github.com/abirzishan32/donation-website/actions/workflows/ci.yml)
+[![CI](https://github.com/abirzishan32/Git-of-Change/actions/workflows/ci.yml/badge.svg)](https://github.com/abirzishan32/Git-of-Change/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 ![Node](https://img.shields.io/badge/node-22.22%2B%20%7C%2024%2B-339933?logo=node.js&logoColor=white)
 
@@ -121,7 +121,7 @@ You'll need:
 ### 1. Install
 
 ```bash
-git clone https://github.com/abirzishan32/donation-website.git
+git clone https://github.com/abirzishan32/Git-of-Change.git
 cd donation-website
 npm install
 ```
@@ -218,8 +218,8 @@ VITE_STRIPE_PUBLISHABLE_KEY=pk_test_... docker compose up --build
 Both images are built, scanned with Trivy and pushed to GitHub Container Registry on every push to `main`:
 
 ```
-ghcr.io/abirzishan32/donation-website/server:latest
-ghcr.io/abirzishan32/donation-website/client:latest
+ghcr.io/abirzishan32/git-of-change/server:latest
+ghcr.io/abirzishan32/git-of-change/client:latest
 ```
 
 The build fails when Trivy finds a critical vulnerability that has a fix available.

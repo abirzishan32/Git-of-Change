@@ -7,7 +7,7 @@
   "author": "Abir Rahman",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abirzishan32/donation-website.git"
+    "url": "git+https://github.com/abirzishan32/Git-of-Change.git"
   },
   "workspaces": [
     "client",
